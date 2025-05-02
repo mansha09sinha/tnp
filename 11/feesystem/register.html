@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - Fee Portal</title>
+  <style>
+    * {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #eaf4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+
+.register-container {
+  background: #ffffff;
+  padding: 30px 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.register-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
+
+.register-container input,
+.register-container select {
+  width: 100%;
+  padding: 12px 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: border-color 0.3s;
+}
+
+.register-container input:focus,
+.register-container select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.register-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.register-container button:hover {
+  background-color: #0056b3;
+}
+
+.register-container p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.register-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+#message {
+  font-size: 14px;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+/* Mobile tweaks */
+@media (max-width: 480px) {
+  .register-container {
+    padding: 20px 15px;
+  }
+
+  .register-container h2 {
+    font-size: 20px;
+  }
+
+  .register-container input,
+  .register-container select {
+    font-size: 14px;
+  }
+
+  .register-container button {
+    font-size: 15px;
+  }
+}
+  </style>
+  
+</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - Fee Portal</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="register-container">
+    <h2>Register</h2>
+    <form id="registerForm">
+        <select id="role" required>
+            <option value="">Select Role</option>
+            <option value="student">Student</option>
+            <option value="admin">Admin</option>
+          </select>
+    
+      <input type="text" id="name" placeholder="Full Name" required>
+
+      <input type="text" id="identifier" placeholder="Email / Roll No" required>
+
+      <input type="password" id="password" placeholder="Password" required>
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+
+     
+      <button type="submit">Register</button>
+    </form>
+    <p id="message" style="color:red;"></p>
+    <p>Already registered? <a href="login.html">Login</a></p>
+  </div>
+
+  <script>
+    const roleSelect = document.getElementById("role");
+    const identifier = document.getElementById("identifier");
+
+    roleSelect.addEventListener("change", () => {
+      if (roleSelect.value === "admin") {
+        identifier.placeholder = "Email Address";
+        identifier.type = "email";
+      } else if (roleSelect.value === "student") {
+        identifier.placeholder = "Roll Number";
+        identifier.type = "text";
+      }
+    });
+
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const idValue = identifier.value.trim();
+      const password = document.getElementById("password").value;
+      const confirm = document.getElementById("confirmPassword").value;
+      const role = roleSelect.value;
+      const message = document.getElementById("message");
+
+      if (!name || !idValue || !role || !password) {
+        message.textContent = "All fields are required!";
+        return;
+      }
+
+      if (password !== confirm) {
+        message.textContent = "Passwords do not match!";
+        return;
+      }
+
+      const userData = {
+        name,
+        identifier: idValue,
+        role,
+        password
+      };
+
+      localStorage.setItem("user_" + idValue, JSON.stringify(userData));
+      message.style.color = "green";
+      message.textContent = "Registration successful! Redirecting...";
+
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
+</body>
+</html>

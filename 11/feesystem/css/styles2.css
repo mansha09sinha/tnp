@@ -1,0 +1,140 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Container for dashboards and forms */
+  .dashboard-container, .admin-dashboard, .payment-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Common headings */
+  h2, h3 {
+    color: #333;
+  }
+  
+  /* Table Styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  td {
+    background-color: #f9f9f9;
+  }
+  
+  /* Button Styles */
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Payment Form Styles */
+  .payment-options form {
+    display: inline-block;
+    margin-right: 15px;
+  }
+  
+  /* Student Dashboard */
+  .dashboard-container {
+    text-align: center;
+  }
+  
+  .dashboard-container h3 {
+    color: #007bff;
+  }
+  
+  .dashboard-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .dashboard-container li {
+    background-color: #f8f9fa;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Admin Panel */
+  .admin-dashboard h3 {
+    color: #28a745;
+    margin-bottom: 10px;
+  }
+  
+  .admin-dashboard table {
+    margin-top: 20px;
+  }
+  
+  .admin-dashboard form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  
+  .admin-dashboard form label {
+    margin: 5px 0;
+  }
+  
+  .admin-dashboard form input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  /* Online Payment Page */
+  .payment-container h2 {
+    text-align: center;
+    color: #007bff;
+  }
+  
+  .payment-container p {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .payment-container button {
+    display: block;
+    width: 100%;
+    font-size: 18px;
+    padding: 15px;
+    background-color: #007bff;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  .payment-container button:hover {
+    background-color: #007bff;
+  }

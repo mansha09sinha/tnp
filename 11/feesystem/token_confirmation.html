@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Token Confirmation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+    .token-box {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+    a:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="token-box">
+    <h2>Your Cash Payment Token</h2>
+    <p><strong>Token ID:</strong> <span id="tokenID"></span></p>
+    <p><strong>Scheduled Date:</strong> <span id="tokenDate"></span></p>
+    <p><strong>Time:</strong> <span id="tokenTime"></span></p>
+    <p><strong>Counter:</strong> <span id="counterValue"></span></p>
+
+    <a href="student_dashboard.html">Back to Dashboard</a>
+  </div>
+
+  <script>
+    // Get token data from localStorage
+    const tokenID = localStorage.getItem("tokenID") || "Not Generated";
+    const tokenDate = localStorage.getItem("tokenDate") || "N/A";
+    const tokenTime = localStorage.getItem("tokenTime") || "N/A";
+
+    // Insert into the page
+    document.getElementById("tokenID").innerText = tokenID;
+    document.getElementById("tokenDate").innerText = tokenDate;
+    document.getElementById("tokenTime").innerText = tokenTime;
+    document.getElementById("counterValue").innerText = "Counter 1"; // Placeholder for counter value
+  </script>
+
+</body>
+</html>

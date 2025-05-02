@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="css/styles2.css">
+</head>
+<body>
+  <div class="admin-dashboard">
+    <h2>Welcome, Admin</h2>
+
+    <h3>Student Management</h3>
+    <hr>
+<h3>Find Student by Roll Number</h3>
+<input type="text" id="rollInput" placeholder="Enter Roll Number" required>
+<button onclick="searchStudent()">Search</button>
+
+<div id="studentDetails" style="margin-top: 20px; display: none;">
+  <h4>Student Information:</h4>
+  <p><strong>Name:</strong> <span id="studentName"></span></p>
+  <p><strong>Email:</strong> <span id="studentEmail"></span></p>
+
+  <h4>Fee Details:</h4>
+  <table border="1" cellpadding="8" style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr>
+        <th>Fee Category</th>
+        <th>Amount (₹)</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="feeTableBody"></tbody>
+  </table>
+</div>
+
+    <h3>Fee Structure Management</h3>
+    <form method="POST" action="update_fee_structure.php">
+      <label for="fee-category">Fee Category:</label>
+      <input type="text" name="fee-category" required>
+      <label for="fee-amount">Fee Amount:</label>
+      <input type="number" name="fee-amount" required>
+      <button type="submit">Update Fee</button>
+    </form>
+  </div>
+  <!-- <script>
+    const studentData = {
+      "230101": { name: "ram", email: "ram@gmail.com", status: "Unpaid" },
+      "230102": { name: "shyam", email: "shyam@gmail.com", status: "Paid" }
+      // Add more roll numbers as needed
+    };
+  
+    function searchStudent() {
+      const rollNo = document.getElementById("rollInput").value.trim();
+      const data = studentData[rollNo];
+  
+      if (data) {
+        document.getElementById("studentDetails").style.display = "block";
+        document.getElementById("studentName").textContent = data.name;
+        document.getElementById("studentEmail").textContent = data.email;
+        document.getElementById("studentStatus").textContent = data.status;
+      } else {
+        alert("Student not found.");
+        document.getElementById("studentDetails").style.display = "none";
+      }
+    }
+  </script> -->
+</body>
+</html>

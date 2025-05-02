@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="css/styles2.css">
+  <style>
+    .logo-container {
+      text-align: center;
+      margin-bottom: 20px;
+      margin-top: 10px;
+    }
+    .logo{
+      width: 120px;
+      height: auto;
+    }
+
+  </style>
+
+</head>
+<body>
+ 
+  <div class="dashboard-container">
+    <div class="logo-container">
+      <img src="duopay.jpg" alt="logo" class="logo">
+    </div>
+    <h2>Welcome, [Student Name]</h2>
+
+    <h3>Fee Summary</h3>
+    <table>
+      <tr>
+        <th>Category</th><th>Amount</th><th>Status</th>
+      </tr>
+      <tr>
+        <td>Tuition Fee</td>
+        <td>₹10,000</td>
+        <td>Unpaid</td>
+      </tr>
+      <tr>
+        <td>Library Fee</td>
+        <td>₹500</td>
+        <td>Paid</td>
+      </tr>
+    </table>
+
+    <div class="payment-options">
+        <h3>Payment Options</h3>
+      
+        <!-- Pay Online Button -->
+        <button onclick="window.location.href='online_payment.html'" style="margin-right: 10px;">
+          Pay Online
+        </button>
+      
+        <!-- Pay via Cash Button -->
+       <button onclick="generateToken()">Pay via Cash (Generate Token)</button>
+       <br>
+         <br>
+       <div id="reminderBox" class="reminder" style="display: none;">
+        <strong>Reminder:</strong> You have a pending fee payment. Please complete it within 7 days.
+        <br>
+        <a href="payment.html" class="pay-btn">Pay Now</a>
+      </div>
+
+<script>
+  function generateToken() {
+    const tokenID = Math.floor(Math.random() * 90000 + 10000);
+    const date = "10th May 2025";
+    const time = "12:00 PM";
+
+    localStorage.setItem("tokenID", tokenID);
+    localStorage.setItem("tokenDate", date);
+    localStorage.setItem("tokenTime", time);
+
+    window.location.href = "token_confirmation.html";
+  }
+
+
+  let feeStatus = localStorage.getItem("feeStatus");
+
+  // If no status exists, simulate unpaid and set start time
+  if (!feeStatus) {
+    feeStatus = "Unpaid";
+    localStorage.setItem("feeStatus", feeStatus);
+    const startTime = new Date().getTime();
+    localStorage.setItem("reminderStart", startTime);
+  }
+
+  // Simulate checking for reminder
+  if (feeStatus === "Unpaid") {
+    const start = parseInt(localStorage.getItem("reminderStart"), 10);
+    const now = new Date().getTime();
+
+    // For testing: use 5 seconds (instead of 7 days)
+    const reminderThreshold = 5000;
+
+    if ((now - start) >= reminderThreshold) {
+      document.getElementById("reminderBox").style.display = "block";
+    }
+  }
+</script>
+      </div>
+      </form>
+
+    
+
+     
+  </div>
+</body>
+</html>
