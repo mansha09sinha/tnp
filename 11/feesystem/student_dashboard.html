@@ -3,107 +3,245 @@
 <head>
   <meta charset="UTF-8">
   <title>Student Dashboard</title>
-  <link rel="stylesheet" href="css/styles2.css">
+  <!-- <link rel="stylesheet" href="css/styles2.css"> -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #c2ffd8, #465efb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .dashboard-container {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      max-width: 900px;
+      width: 95%;
+      margin: 20px;
+    }
+
     .logo-container {
       text-align: center;
       margin-bottom: 20px;
-      margin-top: 10px;
     }
-    .logo{
-      width: 120px;
+
+    .logo {
+      width: 80px;
       height: auto;
     }
 
-  </style>
+    h2, h3 {
+      text-align: center;
+      color: #333;
+      margin: 10px 0;
+    }
 
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: #222020cc;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 14px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      color: #fff;
+    }
+
+    th {
+      background-color: #1f1d1d;
+      font-weight: bold;
+    }
+
+    .payment-options {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .payment-options button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .payment-options button:hover {
+      background-color: #45a049;
+    }
+
+    .reminder {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #fff3cd;
+      border: 1px solid #ffeeba;
+      color: #856404;
+      border-radius: 8px;
+    }
+
+    .pay-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #ff5722;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .pay-btn:hover {
+      background-color: #e64a19;
+    }
+
+    @media (max-width: 600px) {
+      .dashboard-container {
+        padding: 20px;
+      }
+
+      h2, h3 {
+        font-size: 1.2rem;
+      }
+
+      th, td {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      .payment-options {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .payment-options button {
+        width: 90%;
+        margin: 8px 0;
+      }
+
+      .logo {
+        width: 60px;
+      }
+    }
+  </style>
 </head>
 <body>
- 
+
   <div class="dashboard-container">
     <div class="logo-container">
       <img src="duopay.jpg" alt="logo" class="logo">
     </div>
-    <h2>Welcome, [Student Name]</h2>
+
+    <h2>Welcome, <span id="studentName">[Student Name]</span></h2>
 
     <h3>Fee Summary</h3>
-    <table>
-      <tr>
-        <th>Category</th><th>Amount</th><th>Status</th>
-      </tr>
-      <tr>
-        <td>Tuition Fee</td>
-        <td>₹10,000</td>
-        <td>Unpaid</td>
-      </tr>
-      <tr>
-        <td>Library Fee</td>
-        <td>₹500</td>
-        <td>Paid</td>
-      </tr>
-    </table>
+    <div class="table-responsive">
+      <table id="feeTable">
+        <thead>
+          <tr>
+            <th>Category</th><th>Amount</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="feeTableBody">
+          <!-- Populated dynamically -->
+        </tbody>
+      </table>
+    </div>
 
     <div class="payment-options">
-        <h3>Payment Options</h3>
-      
-        <!-- Pay Online Button -->
-        <button onclick="window.location.href='online_payment.html'" style="margin-right: 10px;">
-          Pay Online
-        </button>
-      
-        <!-- Pay via Cash Button -->
-       <button onclick="generateToken()">Pay via Cash (Generate Token)</button>
-       <br>
-         <br>
-       <div id="reminderBox" class="reminder" style="display: none;">
+      <h3>Payment Options</h3>
+      <button onclick="window.location.href='online_payment.html'">Pay Online</button>
+      <button onclick="generateToken()">Pay via Cash (Generate Token)</button>
+
+      <!-- <div id="reminderBox" class="reminder" style="display: none;">
         <strong>Reminder:</strong> You have a pending fee payment. Please complete it within 7 days.
         <br>
         <a href="payment.html" class="pay-btn">Pay Now</a>
-      </div>
-
-<script>
-  function generateToken() {
-    const tokenID = Math.floor(Math.random() * 90000 + 10000);
-    const date = "10th May 2025";
-    const time = "12:00 PM";
-
-    localStorage.setItem("tokenID", tokenID);
-    localStorage.setItem("tokenDate", date);
-    localStorage.setItem("tokenTime", time);
-
-    window.location.href = "token_confirmation.html";
-  }
-
-
-  let feeStatus = localStorage.getItem("feeStatus");
-
-  // If no status exists, simulate unpaid and set start time
-  if (!feeStatus) {
-    feeStatus = "Unpaid";
-    localStorage.setItem("feeStatus", feeStatus);
-    const startTime = new Date().getTime();
-    localStorage.setItem("reminderStart", startTime);
-  }
-
-  // Simulate checking for reminder
-  if (feeStatus === "Unpaid") {
-    const start = parseInt(localStorage.getItem("reminderStart"), 10);
-    const now = new Date().getTime();
-
-    // For testing: use 5 seconds (instead of 7 days)
-    const reminderThreshold = 5000;
-
-    if ((now - start) >= reminderThreshold) {
-      document.getElementById("reminderBox").style.display = "block";
-    }
-  }
-</script>
-      </div>
-      </form>
-
-    
-
-     
+      </div> -->
+    </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const rollNo = localStorage.getItem("studentRollNo") || "230101";
+
+      fetch(`get_student_fees.php?roll=${rollNo}`)
+        .then(response => {
+          if (!response.ok) throw new Error("Student not found");
+          return response.json();
+        })
+        .then(data => {
+          document.getElementById("studentName").textContent = data.name;
+          const tableBody = document.getElementById("feeTableBody");
+          tableBody.innerHTML = "";
+
+          data.fees.forEach(fee => {
+            const row = `<tr>
+              <td>${fee.category}</td>
+              <td>₹${fee.amount}</td>
+              <td>${fee.status}</td>
+            </tr>`;
+            tableBody.innerHTML += row;
+          });
+
+          const unpaid = data.fees.some(fee => fee.status === "Unpaid");
+          localStorage.setItem("feeStatus", unpaid ? "Unpaid" : "Paid");
+          if (unpaid && !localStorage.getItem("reminderStart")) {
+            localStorage.setItem("reminderStart", new Date().getTime());
+          }
+        })
+        .catch(error => {
+          alert("Error fetching student data.");
+          console.error(error);
+        });
+
+      setTimeout(() => {
+        if (localStorage.getItem("feeStatus") === "Unpaid") {
+          const start = parseInt(localStorage.getItem("reminderStart"), 10);
+          const now = new Date().getTime();
+          const threshold = 5000;
+          if (now - start >= threshold) {
+            document.getElementById("reminderBox").style.display = "block";
+          }
+        }
+      }, 1000);
+    });
+
+    function generateToken() {
+      const tokenID = Math.floor(Math.random() * 90000 + 10000);
+      const date = "10th May 2025";
+      const time = "12:00 PM";
+
+      localStorage.setItem("tokenID", tokenID);
+      localStorage.setItem("tokenDate", date);
+      localStorage.setItem("tokenTime", time);
+
+      window.location.href = "token_confirmation.html";
+    }
+  </script>
 </body>
 </html>

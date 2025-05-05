@@ -64,55 +64,8 @@ body {
     display: inline-block;
     margin-right: 15px;
   }
-  
-  /* Student Dashboard */
-  .dashboard-container {
-    text-align: center;
-  }
-  
-  .dashboard-container h3 {
-    color: #007bff;
-  }
-  
-  .dashboard-container ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .dashboard-container li {
-    background-color: #f8f9fa;
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  /* Admin Panel */
-  .admin-dashboard h3 {
-    color: #28a745;
-    margin-bottom: 10px;
-  }
-  
-  .admin-dashboard table {
-    margin-top: 20px;
-  }
-  
-  .admin-dashboard form {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-  }
-  
-  .admin-dashboard form label {
-    margin: 5px 0;
-  }
-  
-  .admin-dashboard form input {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
+ 
+
   /* Online Payment Page */
   .payment-container h2 {
     text-align: center;

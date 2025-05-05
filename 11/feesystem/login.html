@@ -3,16 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <title>Login - Fee Payment Portal</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #eaf4ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .login-container {
+      background-color: #ffffff;
+      padding: 35px 30px;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0, 123, 255, 0.15);
+      width: 90%;
+      max-width: 420px;
+    }
+
     .logo-container {
       text-align: center;
-      margin-bottom: 10px;
-      margin-top: 10px;
+      margin-bottom: 15px;
     }
-    .logo{
-      width: 120px;
+
+    .logo {
+      width: 100px;
       height: auto;
+    }
+
+    h2 {
+      color: #45a049;
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 26px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      transition: border 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: #45a049;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #45a049;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    a {
+      color: #45a049;
+      text-decoration: none;
+    }
+
+    /* Mobile Optimization */
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 25px 18px;
+        border-radius: 14px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      input, select {
+        padding: 12px;
+        font-size: 14px;
+      }
+
+      button {
+        padding: 12px;
+        font-size: 15px;
+      }
     }
   </style>
 </head>
@@ -22,45 +118,32 @@
       <img src="duopay.jpg" alt="logo" class="logo">
     </div>
     <h2>Login</h2>
-    <!-- <form method="POST" action="">
+    <form id="loginForm">
       <input type="text" name="username" placeholder="Email or Roll No" required>
       <input type="password" name="password" placeholder="Password" required>
-      <select name="role" required>
+      <select name="role" id="role" required>
         <option value="">Select Role</option>
         <option value="student">Student</option>
         <option value="admin">Admin</option>
       </select>
       <button type="submit">Login</button>
-        <p>Don't have an account? <a href="register.html">Register here</a></p>
-
-    </form> -->
-    <form id="loginForm">
-        <input type="text" name="username" placeholder="Email or Roll No" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <select name="role" id="role" required>
-          <option value="">Select Role</option>
-          <option value="student">Student</option>
-          <option value="admin">Admin</option>
-        </select>
-        <button type="submit">Login</button>
-        <p>Don't have an account? <a href="register.html">Register here</a></p>
-      </form>
-      
-      <script>
-        document.getElementById("loginForm").addEventListener("submit", function(e) {
-          e.preventDefault(); // Stop form from reloading the page
-      
-          const role = document.getElementById("role").value;
-      
-          if (role === "student") {
-            window.location.href = "student_dashboard.html";
-          } else if (role === "admin") {
-            window.location.href = "admin_panel.html";
-          } else {
-            alert("Please select a valid role");
-          }
-        });
-      </script>
+      <p>Don't have an account? <a href="register.html">Register here</a></p>
+    </form>
   </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const role = document.getElementById("role").value;
+
+      if (role === "student") {
+        window.location.href = "student_dashboard.html";
+      } else if (role === "admin") {
+        window.location.href = "admin_panel.html";
+      } else {
+        alert("Please select a valid role");
+      }
+    });
+  </script>
 </body>
 </html>

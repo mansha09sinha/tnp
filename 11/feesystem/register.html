@@ -5,133 +5,121 @@
   <title>Register - Fee Portal</title>
   <style>
     * {
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
 
-body {
-  background: #eaf4ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  margin: 0;
-  padding: 20px;
-}
+    body {
+      background: linear-gradient(135deg, #c2ffd8, #465efb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
 
-.register-container {
-  background: #ffffff;
-  padding: 30px 20px;
-  border-radius: 16px;
-  box-shadow: 0 0 15px rgba(0, 123, 255, 0.1);
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-}
+    .register-container {
+      background: #ffffff;
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(20, 233, 162, 0.1);
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
 
-.register-container h2 {
-  margin-bottom: 20px;
-  color: #333;
-  font-size: 24px;
-}
+    .register-container h2 {
+      margin-bottom: 20px;
+      color: #45a049;
+      font-size: 26px;
+    }
 
-.register-container input,
-.register-container select {
-  width: 100%;
-  padding: 12px 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 15px;
-  transition: border-color 0.3s;
-}
+    .register-container input,
+    .register-container select {
+      width: 100%;
+      padding: 12px 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 15px;
+      transition: border-color 0.3s;
+    }
 
-.register-container input:focus,
-.register-container select:focus {
-  border-color: #007bff;
-  outline: none;
-}
+    .register-container input:focus,
+    .register-container select:focus {
+      border-color: #45a049;
+      outline: none;
+    }
 
-.register-container button {
-  width: 100%;
-  padding: 12px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  font-size: 16px;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background-color 0.3s;
-}
+    .register-container button {
+      width: 100%;
+      padding: 12px;
+      background-color: #45a049;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
 
-.register-container button:hover {
-  background-color: #0056b3;
-}
+    .register-container button:hover {
+      background-color: #45a049;
+    }
 
-.register-container p {
-  margin-top: 15px;
-  font-size: 14px;
-}
+    .register-container p {
+      margin-top: 15px;
+      font-size: 14px;
+    }
 
-.register-container a {
-  color: #007bff;
-  text-decoration: none;
-}
+    .register-container a {
+      color: #007bff;
+      text-decoration: none;
+    }
 
-#message {
-  font-size: 14px;
-  margin-top: 10px;
-  font-weight: 500;
-}
+    #message {
+      font-size: 14px;
+      margin-top: 10px;
+      font-weight: 500;
+    }
 
-/* Mobile tweaks */
-@media (max-width: 480px) {
-  .register-container {
-    padding: 20px 15px;
-  }
+    @media (max-width: 480px) {
+      .register-container {
+        padding: 20px 15px;
+      }
 
-  .register-container h2 {
-    font-size: 20px;
-  }
+      .register-container h2 {
+        font-size: 22px;
+      }
 
-  .register-container input,
-  .register-container select {
-    font-size: 14px;
-  }
+      .register-container input,
+      .register-container select {
+        font-size: 14px;
+      }
 
-  .register-container button {
-    font-size: 15px;
-  }
-}
+      .register-container button {
+        font-size: 15px;
+      }
+    }
   </style>
-  
-</head>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Register - Fee Portal</title>
-  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <div class="register-container">
     <h2>Register</h2>
     <form id="registerForm">
-        <select id="role" required>
-            <option value="">Select Role</option>
-            <option value="student">Student</option>
-            <option value="admin">Admin</option>
-          </select>
-    
+      <select id="role" required>
+        <option value="">Select Role</option>
+        <option value="student">Student</option>
+        <option value="admin">Admin</option>
+      </select>
+
       <input type="text" id="name" placeholder="Full Name" required>
-
       <input type="text" id="identifier" placeholder="Email / Roll No" required>
-
       <input type="password" id="password" placeholder="Password" required>
       <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
 
-     
       <button type="submit">Register</button>
     </form>
     <p id="message" style="color:red;"></p>
@@ -188,7 +176,5 @@ body {
       }, 1500);
     });
   </script>
-</body>
-</html>
 </body>
 </html>

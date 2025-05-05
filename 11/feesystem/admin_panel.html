@@ -1,68 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Panel</title>
-  <link rel="stylesheet" href="css/styles2.css">
+  <meta charset="UTF-8" />
+  <title>Admin Fee Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(135deg, #c2ffd8, #465efb);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px;
+    }
+
+    .admin-panel {
+      width: 100%;
+      max-width: 1000px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      padding: 30px;
+      border-radius: 20px;
+      color: #000;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+
+    h2, h3 {
+      margin-bottom: 20px;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+      width: 100%;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    button {
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #388e3c;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background: #f0f0f0;
+    }
+
+    .status-paid { color: green; font-weight: bold; }
+    .status-unpaid { color: red; font-weight: bold; }
+
+    @media (max-width: 768px) {
+      body { padding: 20px; }
+      .admin-panel { padding: 20px; }
+      table, th, td { font-size: 14px; }
+    }
+
+    .paid-input {
+      margin-top: 5px;
+      display: flex;
+      gap: 5px;
+    }
+
+    .paid-input input {
+      width: 60%;
+    }
+
+    .paid-input button {
+      width: 40%;
+      padding: 8px;
+    }
+
+    .add-fee-section {
+      margin-top: 30px;
+    }
+  </style>
 </head>
 <body>
-  <div class="admin-dashboard">
-    <h2>Welcome, Admin</h2>
+  <div class="admin-panel">
+    <h2>Admin Fee Management</h2>
 
-    <h3>Student Management</h3>
-    <hr>
-<h3>Find Student by Roll Number</h3>
-<input type="text" id="rollInput" placeholder="Enter Roll Number" required>
-<button onclick="searchStudent()">Search</button>
+    <h3>Search Student</h3>
+    <input type="text" id="rollInput" placeholder="Enter Roll Number">
+    <button onclick="fetchStudent()">Search</button>
 
-<div id="studentDetails" style="margin-top: 20px; display: none;">
-  <h4>Student Information:</h4>
-  <p><strong>Name:</strong> <span id="studentName"></span></p>
-  <p><strong>Email:</strong> <span id="studentEmail"></span></p>
+    <div id="studentInfo" style="display:none;">
+      <h3>Student Info</h3>
+      <p><strong>Name:</strong> <span id="studentName"></span></p>
+      <p><strong>Email:</strong> <span id="studentEmail"></span></p>
 
-  <h4>Fee Details:</h4>
-  <table border="1" cellpadding="8" style="width: 100%; border-collapse: collapse;">
-    <thead>
-      <tr>
-        <th>Fee Category</th>
-        <th>Amount (₹)</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody id="feeTableBody"></tbody>
-  </table>
-</div>
-
-    <h3>Fee Structure Management</h3>
-    <form method="POST" action="update_fee_structure.php">
-      <label for="fee-category">Fee Category:</label>
-      <input type="text" name="fee-category" required>
-      <label for="fee-amount">Fee Amount:</label>
-      <input type="number" name="fee-amount" required>
-      <button type="submit">Update Fee</button>
-    </form>
+      <h3>Fee Details</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Total (₹)</th>
+            <th>Paid (₹)</th>
+            <th>Due (₹)</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="feeTableBody"></tbody>
+      </table>
+      
+      <!-- Add New Fee Section -->
+      <div class="add-fee-section">
+        <h3>Add New Fee Category</h3>
+        <input type="text" id="newCategory" placeholder="Fee Category (e.g., Sports Fee)" />
+        <input type="number" id="newTotal" placeholder="Total Amount ₹" min="0" />
+        <input type="number" id="newPaid" placeholder="Paid Amount ₹" min="0" />
+        <button onclick="addNewFee()">Add Fee</button>
+      </div>
+    </div>
   </div>
-  <!-- <script>
+
+  <script>
     const studentData = {
-      "230101": { name: "ram", email: "ram@gmail.com", status: "Unpaid" },
-      "230102": { name: "shyam", email: "shyam@gmail.com", status: "Paid" }
-      // Add more roll numbers as needed
-    };
-  
-    function searchStudent() {
-      const rollNo = document.getElementById("rollInput").value.trim();
-      const data = studentData[rollNo];
-  
-      if (data) {
-        document.getElementById("studentDetails").style.display = "block";
-        document.getElementById("studentName").textContent = data.name;
-        document.getElementById("studentEmail").textContent = data.email;
-        document.getElementById("studentStatus").textContent = data.status;
-      } else {
-        alert("Student not found.");
-        document.getElementById("studentDetails").style.display = "none";
+      "1234": {
+        name: "Mansha Sinha",
+        email: "mansha@example.com",
+        fees: [
+          { category: "Tuition Fee", total: 50000, paid: 50000 },
+          { category: "Library Fee", total: 3000, paid: 1000 },
+          { category: "Hostel Fee", total: 25000, paid: 0 }
+        ]
       }
+    };
+
+    function fetchStudent() {
+      const roll = document.getElementById("rollInput").value.trim();
+      const student = studentData[roll];
+
+      if (!student) {
+        alert("Student not found.");
+        return;
+      }
+
+      document.getElementById("studentInfo").style.display = "block";
+      document.getElementById("studentName").textContent = student.name;
+      document.getElementById("studentEmail").textContent = student.email;
+
+      const tbody = document.getElementById("feeTableBody");
+      tbody.innerHTML = "";
+
+      student.fees.forEach((fee, index) => {
+        const due = fee.total - fee.paid;
+        const status = due === 0 ? "Paid" : "Unpaid";
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td>${fee.category}</td>
+          <td>₹${fee.total}</td>
+          <td>₹${fee.paid}</td>
+          <td>₹${due}</td>
+          <td class="${status === 'Paid' ? 'status-paid' : 'status-unpaid'}">${status}</td>
+          <td>
+            ${status === "Unpaid" ? ` 
+              <div class="paid-input">
+                <input type="number" min="1" max="${due}" placeholder="₹ amount" id="pay-${index}">
+                <button onclick="markPartialPayment('${roll}', ${index})">Mark</button>
+              </div>
+            ` : "—"}
+          </td>
+        `;
+
+        tbody.appendChild(row);
+      });
     }
-  </script> -->
+
+    function markPartialPayment(roll, index) {
+      const input = document.getElementById(`pay-${index}`);
+      const amount = parseInt(input.value);
+
+      if (isNaN(amount) || amount <= 0) {
+        alert("Enter valid amount.");
+        return;
+      }
+
+      const fee = studentData[roll].fees[index];
+      const due = fee.total - fee.paid;
+
+      if (amount > due) {
+        alert("Amount exceeds due.");
+        return;
+      }
+
+      fee.paid += amount;
+      alert(`₹${amount} marked as paid for ${fee.category}.`);
+      fetchStudent(); // Refresh table
+    }
+
+    // Add new fee category function
+    function addNewFee() {
+      const roll = document.getElementById("rollInput").value.trim();
+      const category = document.getElementById("newCategory").value.trim();
+      const total = parseInt(document.getElementById("newTotal").value);
+      const paid = parseInt(document.getElementById("newPaid").value);
+
+      if (!category || isNaN(total) || total <= 0 || isNaN(paid) || paid < 0) {
+        alert("Please enter valid details.");
+        return;
+      }
+
+      const student = studentData[roll];
+      student.fees.push({ category, total, paid });
+
+      // Clear inputs
+      document.getElementById("newCategory").value = "";
+      document.getElementById("newTotal").value = "";
+      document.getElementById("newPaid").value = "";
+
+      alert(`New fee "${category}" added successfully.`);
+      fetchStudent(); // Refresh fee table
+    }
+  </script>
 </body>
 </html>
